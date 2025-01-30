@@ -113,6 +113,11 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     public void StartGameManager() => Debug.Log("Game Manager on duty!");
 
     private void Start()
@@ -155,6 +160,23 @@ public class GameManager : MonoBehaviour
             Punches10 = false, Punches100 = false, Hits100 = false, Hits20 = false, Hits40 = false, Hits500 = false, Kicks10 = false, Kicks100 = false, Kicks20 = false, Kicks50 = false, Punches20 = false, Punches50 = false
         };
         return combatAchievement;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
+    {
+        if (scene.buildIndex == 1)
+        {
+            DistanceTravelled = 0;
+            PunchCount = 0;
+            KickCount = 0;
+            TotalHitsCount = 0;
+            StatsReadyForDisplay.Invoke();
+        }
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnDestroy() => _applicationIsQuiting = true; // On Gameobject Destroyed set application is quitting flag to true

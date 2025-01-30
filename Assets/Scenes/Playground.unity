@@ -3537,6 +3537,7 @@ MonoBehaviour:
   - CombatType: 3
     AchievementGoal: 500
     PropertyName: 500 Hits
+  _inputs: {fileID: 135756641613574975}
 --- !u!1 &279130774
 GameObject:
   m_ObjectHideFlags: 0

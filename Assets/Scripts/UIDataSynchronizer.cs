@@ -12,6 +12,9 @@ public class UIDataSynchronizer : MonoBehaviour
     [SerializeField] private System.Collections.Generic.List<AchievementKeyValuePair> _runnerProperties;
     [SerializeField] private System.Collections.Generic.List<AchievementKeyValuePair> _combatProperties;
 
+    [Header("Starter Asset Input")]
+    [SerializeField] private StarterAssets.StarterAssetsInputs _inputs;
+
     private DistanceAchievement _distanceAchievements;
     private CombatAchievement _combatAchievements;
 
@@ -286,7 +289,11 @@ public class UIDataSynchronizer : MonoBehaviour
     }
 
     // Quit the game on Yes Clicked from Quit Confirmation Panel
-    public void QuitGame() => Application.Quit();
+    public void QuitGame()
+    {
+        _inputs.uIControl = true;
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
+    }
 
     private void OnDisable()
     {
